@@ -1,0 +1,36 @@
+pipeline{
+    agent any
+    stages{
+        stage('checkout'){
+            steps{
+                git 'https://github.com/jeyakirthikavjk-bit/currencyConverter.git'
+            }
+        }
+        stage('install dependencies'){
+            steps{
+                bat 'npm install'
+            }
+        }
+        stage('build'){
+            steps{
+                bat 'npm run build'
+            }
+        }
+        stage('deploy'){
+            steps{
+                bat ...
+                mkdir "C:\\ProgramDta\\Jenkins\\.jenkins\\userContent\\currency_Converter"
+                xcopy /E /I /Y "dist\\*" "C:\\ProgramDta\\Jenkins\\.jenkins\\workspace\\currencyConverter\\dist" "C:\\ProgramDta\\Jenkins\\.jenkins\\userContent\\currency_Converter"
+                ...
+            }
+        }
+    }
+    post{
+        Success{
+            echo 'Build and deployment completed successfully.'
+        }
+        failure{
+            echo 'Build or deployment failed.'
+        }
+    }
+}
