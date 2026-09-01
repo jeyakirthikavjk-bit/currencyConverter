@@ -10,13 +10,13 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Install') {
             steps {
                 bat 'npm ci'
             }
         }
 
-        stage('Build React App') {
+        stage('Build') {
             steps {
                 bat 'npm run build'
             }
@@ -38,7 +38,7 @@ pipeline {
         }
 
         failure {
-            echo 'Pipeline failed!'
+            echo 'Currency Converter pipeline failed!'
         }
     }
 }
